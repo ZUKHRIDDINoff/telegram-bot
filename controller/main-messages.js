@@ -29,6 +29,16 @@ exports.backendCourse = (ctx) => {
   const queryProps = messageModel.backendCourseMessage(ctx, text);
   apiModel.apiRequestPOST(queryProps, 'editMessageText');
 };
+exports.frontendCourse = (ctx) => {
+  const text = aboutTexts.frontendCourse();
+  const queryProps = messageModel.frontendCourseMessage(ctx, text);
+  apiModel.apiRequestPOST(queryProps, 'editMessageText');
+};
+exports.initialProgCourse = (ctx) => {
+  const text = aboutTexts.initialProgCourse();
+  const queryProps = messageModel.initialProgCourseMessage(ctx, text);
+  apiModel.apiRequestPOST(queryProps, 'editMessageText');
+};
 
 
 

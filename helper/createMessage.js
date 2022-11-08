@@ -9,7 +9,7 @@ exports.startMessage = (ctx) => {
     const keyboard = Markup
     .keyboard([
         ['📗 Kurslar'],
-        ['☸ Sozlamalar', '📞 Murojaat qilish']
+        ["📍 Manzil", "📞 Admin bilan bog'lanish"]
     ]).resize();
     
     return {
@@ -18,6 +18,7 @@ exports.startMessage = (ctx) => {
     };
 };
 
+// Course Types
 exports.courseTypesMessage = (ctx, status) => {
     const queryProps = {
         text: "Yo'nalishni tanlang!",
@@ -52,7 +53,7 @@ exports.computerCourseMessage = (ctx) => {
             [Markup.button.callback('Backend Dasturlash','backendCourse')],
             [Markup.button.callback('Frontend Dasturlash','frontendCourse')],
             [Markup.button.callback('Kompyuter Savodxonligi','initialProgCourse')],
-            [Markup.button.callback('🔙 Ortga qaytish','backToCourses')]
+            [Markup.button.callback('🔙 Ortga','backToCourses')]
         ])
     };
 
@@ -65,14 +66,44 @@ exports.backendCourseMessage = (ctx, text) => {
         message_id,
         chat_id,
         ...Markup.inlineKeyboard([
-            Markup.button.callback('🔙 Ortga qaytish', 'backToProgCourses')
+            Markup.button.callback('🔙 Ortga', 'backToProgCourses')
         ]),
         parse_mode: 'HTML',
         disable_web_page_preview: true
     };
 
     return queryProps;
-}
+};
+exports.frontendCourseMessage = (ctx, text) => {
+    const { message_id, chat:{id: chat_id} } = ctx.update.callback_query.message;
+    const queryProps = {
+        text,
+        message_id,
+        chat_id,
+        ...Markup.inlineKeyboard([
+            Markup.button.callback('🔙 Ortga', 'backToProgCourses')
+        ]),
+        parse_mode: 'HTML',
+        disable_web_page_preview: true
+    };
+
+    return queryProps;
+};
+exports.initialProgCourseMessage = (ctx, text) => {
+    const { message_id, chat:{id: chat_id} } = ctx.update.callback_query.message;
+    const queryProps = {
+        text,
+        message_id,
+        chat_id,
+        ...Markup.inlineKeyboard([
+            Markup.button.callback('🔙 Ortga', 'backToProgCourses')
+        ]),
+        parse_mode: 'HTML',
+        disable_web_page_preview: true
+    };
+
+    return queryProps;
+};
 
 
 // Language Courses
@@ -87,13 +118,14 @@ exports.langCourseMessage = (ctx) => {
         ...Markup.inlineKeyboard([
             [Markup.button.callback('🇬🇧 Ingliz tili (IELTS)','englishCourse')],
             [Markup.button.callback('🇷🇺 Rus tili','russianCourse')],
-            [Markup.button.callback('🔙 Ortga qaytish','backToCourses')]
+            [Markup.button.callback('🔙 Ortga','backToCourses')]
         ])
     };
 
     return queryProps;
 };
 
+// Subject Courses
 exports.subjectCourseMessage = (ctx) => {
     const { message_id, chat:{id: chat_id} } = ctx.update.callback_query.message;
     const queryProps = {
@@ -111,13 +143,14 @@ exports.subjectCourseMessage = (ctx) => {
             [Markup.button.callback('Tarix','russianCourse')],
             [Markup.button.callback('Huquq','russianCourse')],
             [Markup.button.callback('Ona tili va adabiyot','russianCourse')],
-            [Markup.button.callback('🔙 Ortga qaytish','backToCourses')]
+            [Markup.button.callback('🔙 Ortga','backToCourses')]
         ])
     };
 
     return queryProps;
 };
 
+// children Courses
 exports.childCourseMessage = (ctx) => {
     const { message_id, chat:{id: chat_id} } = ctx.update.callback_query.message;
     const queryProps = {
@@ -129,7 +162,7 @@ exports.childCourseMessage = (ctx) => {
         ...Markup.inlineKeyboard([
             [Markup.button.callback('🇬🇧 Ingliz tili (Bolalar uchun)','englishKidsCourse')],
             [Markup.button.callback('🇷🇺 Rus tili (Bolalar uchun)','russianKidsCourse')],
-            [Markup.button.callback('🔙 Ortga qaytish','backToCourses')]
+            [Markup.button.callback('🔙 Ortga','backToCourses')]
         ])
     };
 
